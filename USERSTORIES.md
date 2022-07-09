@@ -1,9 +1,9 @@
 AS A Card game enthusiast
-I WANT To be able to search for MGT cards
+I WANT To be able to search for MTG cards
 SO THAT I can select them to build a deck
 
 AS A Deck builder
-I WANT to be able to filter my searches by rarity and set
+I WANT to be able to filter my searches by rarity and set type
 SO THAT I easily browse relevant cards that I might want to add
 
 AS A Deck builder

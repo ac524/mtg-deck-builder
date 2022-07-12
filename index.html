@@ -6,15 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magic: The Gathering Deck Builder</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/dd3761bf5b.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="d-flex gap-2 justify-content-center my-3">
-        <button id="get-cards-legendary" class="px-4 py-2 font-semibold text-sm bg-sky-500 hover:bg-sky-700 text-white rounded-md shadow-sm">Get Legendary Cards</button>
-        <button id="get-cards-basic" class="btn btn-secondary">Get Basic Cards</button>
+    <!-- Navbar -->
+    <div class="flex justify-between border-b border-solid border-zinc-300">
+        <h1 class="p-2">MTG Deck Builder</h1>
+        <nav class="flex divide-x divide-zinc-300">
+            <a class="px-4 py-2 bg-zinc-100 hover:bg-amber-200" href="./index.html"><i class="fa-solid fa-magnifying-glass"></i> Search</a>
+            <a class="px-4 py-2 bg-zinc-100 hover:bg-amber-200" href="./mydeck.html"><i class="fa-solid fa-book"></i> My Deck</a>
+        </nav>
     </div>
-    <div class="container">
-        <div id="results" class="row g-2 g-xl-3">
+
+    <div class="flex justify-center gap-2 my-4">
+        <button id="get-cards-legendary" class="px-4 py-2 font-semibold text-sm bg-sky-500 hover:bg-sky-600 text-white rounded-md shadow-sm">Get Legendary Cards</button>
+        <button id="get-cards-basic" class="px-4 py-2 font-semibold text-sm bg-emerald-500 hover:bg-emerald-600 text-white rounded-md shadow-sm">Get Basic Cards</button>
+    </div>
+
+    <div class="container mx-auto grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 px-4" id="results">
+        <div class="grid gap-2">
+            <div class="px-2 bg-zinc-200 flex justify-between rounded-md">
+                <h2 class="p-2">Academy Researchers</h2>
+                <button class="hover:text-sky-500 p-2"><i class="fa-solid fa-heart"></i></button>
+            </div>
+            <img
+                class="w-full"
+                src="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=132072&type=card"
+            />
+        </div>
+        <div class="bg-zinc-100">
+            <img class="w-full" src="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=132072&type=card" />
+        </div>
+        <div class="bg-zinc-100">
+            <img class="w-full" src="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=132072&type=card" />
+        </div>
+        <div class="bg-zinc-100">
+            <img class="w-full" src="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=132072&type=card" />
+        </div>
+        <div class="bg-zinc-100">
+            <img class="w-full" src="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=132072&type=card" />
+        </div>
+        <div class="bg-zinc-100">
+            <img class="w-full" src="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=132072&type=card" />
         </div>
     </div>
+    <script src="./js/mtgapi.js"></script>
+    <script src="./js/render.js"></script>
+    <script src="./js/search.js"></script>
 </body>
 </html>

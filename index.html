@@ -18,13 +18,50 @@
         </nav>
     </div>
 
-    <div class="flex justify-center gap-2 my-4">
-        <button id="get-cards-legendary" class="px-4 py-2 font-semibold text-sm bg-sky-500 hover:bg-sky-600 text-white rounded-md shadow-sm">Get Legendary Cards</button>
-        <button id="get-cards-basic" class="px-4 py-2 font-semibold text-sm bg-emerald-500 hover:bg-emerald-600 text-white rounded-md shadow-sm">Get Basic Cards</button>
+
+    <div class="container mx-auto px-4 my-5">
+        <div class="border border-solid border-zinc-300 p-4 grid grid-cols-2 md:grid-cols-4 gap-2">
+            <div class="grid gap-1">
+                <label for="card-name-field">Card Name</label>
+                <input id="card-name-field" type="text" class="w-full border border-solid border-zinc-200 rounded-md p-2">
+            </div>
+            <div class="grid gap-1">
+                <label for="card-rarity-field">Rarity</label>
+                <select id="card-rarity-field" class="border border-solid border-zinc-200 rounded-md p-2">
+                    <option value="">All</option>
+                    <option value="Common">Common</option>
+                    <option value="Uncommon">Uncommon</option>
+                    <option value="Rare">Rare</option>
+                    <option value="Mythic Rare">Mythic Rare</option>
+                    <option value="Special">Special</option>
+                    <option value="Basic Land">Basic Land</option>
+                </select>
+            </div>
+            <div class="grid gap-1">
+                <label for="card-set-field">Set</label>
+                <select id="card-set-field" class="border border-solid border-zinc-200 rounded-md p-2">
+                    <option value="">All</option>
+                    <option value="10E">Tenth Edition</option>
+                    <option value="2ED">Unlimited Edition</option>
+                    <option value="KTK">Khans of Tarkir</option>
+                </select>
+            </div>
+            <button id="search-btn" class="px-4 py-2 font-semibold text-sm bg-sky-500 hover:bg-sky-600 text-white rounded-md shadow-sm"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+        </div>
     </div>
 
-    <div class="container mx-auto grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 px-4" id="results">
-        <div class="grid gap-2">
+    <!-- <div class="flex justify-center gap-2 my-4">
+        <button id="get-cards-legendary" class="px-4 py-2 font-semibold text-sm bg-sky-500 hover:bg-sky-600 text-white rounded-md shadow-sm">Get Legendary Cards</button>
+        <button id="get-cards-basic" class="px-4 py-2 font-semibold text-sm bg-emerald-500 hover:bg-emerald-600 text-white rounded-md shadow-sm">Get Basic Cards</button>
+    </div> -->
+
+    <div id="intro" class="container mx-auto px-4 text-center mt-6 flex flex-col justify-center align-center gap-3 min-h-[50vh]">
+        <h1 class="text-2xl font-bold">Welcome to the Magic:The Gathering deck builder!</h1>
+        <p>Use the search form above to look up cards to build your deck.</p>
+    </div>
+
+    <div class="container mx-auto grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 px-4" id="results">
+        <!-- <div class="grid gap-2">
             <div class="px-2 bg-zinc-200 flex justify-between rounded-md">
                 <h2 class="p-2">Academy Researchers</h2>
                 <button class="hover:text-sky-500 p-2"><i class="fa-solid fa-heart"></i></button>
@@ -33,22 +70,7 @@
                 class="w-full"
                 src="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=132072&type=card"
             />
-        </div>
-        <div class="bg-zinc-100">
-            <img class="w-full" src="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=132072&type=card" />
-        </div>
-        <div class="bg-zinc-100">
-            <img class="w-full" src="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=132072&type=card" />
-        </div>
-        <div class="bg-zinc-100">
-            <img class="w-full" src="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=132072&type=card" />
-        </div>
-        <div class="bg-zinc-100">
-            <img class="w-full" src="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=132072&type=card" />
-        </div>
-        <div class="bg-zinc-100">
-            <img class="w-full" src="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=132072&type=card" />
-        </div>
+        </div> -->
     </div>
     <script src="./js/mtgapi.js"></script>
     <script src="./js/render.js"></script>

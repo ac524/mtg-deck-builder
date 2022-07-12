@@ -21,7 +21,6 @@ function getCardsContent(cards) {
         />`;
 
         divEl.innerHTML = template;
-        cards[i];
         fragEl.append(divEl);
     }
 

@@ -27,7 +27,7 @@ searchBtnEl.addEventListener("click", function() {
     getCards(requestOptions)
         .then(function (data) {
             if(!isIntroHidden) {
-                introEl.style.display = "none"
+                introEl.style.display = "none";
                 isIntroHidden = true;
             }
             var cards = data.cards;

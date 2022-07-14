@@ -1,10 +1,6 @@
 var apiBaseUrl = "https://api.magicthegathering.io/v1/";
 
-function getCards( options ) {
-
-    // name
-    // rarity
-    // set
+function getMTGCards( options ) {
 
     var getCardsUrl = apiBaseUrl + "/cards";
 
@@ -21,11 +17,18 @@ function getCards( options ) {
 
 }
 
-function getCardsBySupertype( supertype ) {
 
-    var getCardsUrl = apiBaseUrl + "/cards?supertypes=" + supertype;
+function getMTGSets() {
 
-    return fetch(getCardsUrl)
+    var getSetsUrl = apiBaseUrl + "/sets";
+
+    // if( options ) {
+    //     var searchParams = new URLSearchParams(options);
+
+    //     getCardsUrl += "?" + searchParams.toString();
+    // }
+
+    return fetch(getSetsUrl)
         .then(function(response) {
             return response.json();
         });

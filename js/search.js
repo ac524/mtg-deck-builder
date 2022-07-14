@@ -1,12 +1,18 @@
-var resultsEl = document.querySelector('#results');
+var resultsEl = $('#results');
 var searchBtnEl = document.querySelector('#search-btn');
 var introEl = document.querySelector('#intro');
 var isIntroHidden = false;
 
-
 var nameFieldEl = document.querySelector('#card-name-field');
 var rarityFieldEl = document.querySelector('#card-rarity-field');
 var setFieldEl = document.querySelector('#card-set-field');
+
+// Load existing saved cards from local storage / Initialize a new deck.
+var savedDeckJSON = localStorage.getItem("mtgDeck");
+var deck = savedDeckJSON ? JSON.parse(savedDeckJSON) : [];
+
+// Global variable for current card data
+var cards;
 
 searchBtnEl.addEventListener("click", function() {
 
@@ -24,41 +30,76 @@ searchBtnEl.addEventListener("click", function() {
         if(setValue) requestOptions.set = setValue;
     }
 
-    getCards(requestOptions)
+    getMTGCards(requestOptions)
         .then(function (data) {
             if(!isIntroHidden) {
                 introEl.style.display = "none";
                 isIntroHidden = true;
             }
-            var cards = data.cards;
+            cards = data.cards;
+            // console.log(cards);
             var content = getCardsContent(cards);
-            console.log(content);
-            resultsEl.innerHTML = "";
-            resultsEl.append(content);
+            // resultsEl.innerHTML = "";
+            resultsEl.html(content);
         });
     
 });
 
+// WHEN the users clicks the heart button
+resultsEl.on("click", "button[data-card-index]", function(event) {
+
+    // console.log(event);
+
+    // console.log("hello", cards, event.target, event.target.dataset, event.target.dataset.cardIndex);
+
+    // THEN I need to get the index for the card related to the button click (data-card-index attr)
+    var cardIndex = parseInt(event.currentTarget.dataset.cardIndex);
+
+    // THEN use the card index to get the whole card object
+    var card = cards[cardIndex];
+
+    // THEN push the card object to the `deck`
+    deck.push(card);
+
+    // Resave the deck to `localStorage`
+    localStorage.setItem("mtgDeck", JSON.stringify(deck));
+
+});
 
 
-// var buttonEl = document.querySelector('#get-cards-legendary');
-// var button2El = document.querySelector('#get-cards-basic');
+    
 
+    
 
+    
 
-// buttonEl.addEventListener("click", function() {
+    
 
-//     getCardsBySupertype("Legendary")
-        // .then(function (data) {
-        //     var cards = data.cards;
-        //     var content = getCardsContent(cards);
-        //     console.log(content);
-        //     resultsEl.innerHTML = "";
-        //     resultsEl.append(content);
-        // });
+function fetchAndDisplaySetOptions() {
 
-// });
+    var savedSetsJSON = localStorage.getItem("mtgSets");
 
-// button2El.addEventListener("click", function() {
-//     getCardsBySupertype("Basic");
-// });
+    var savedSets = savedSetsJSON ? JSON.parse(savedSetsJSON) : false;
+    
+    if( savedSets ) {
+        var content = getSetOptionsContent(savedSets);
+        setFieldEl.innerHTML = "";
+        setFieldEl.append(content);
+        return;
+    }
+    
+    getMTGSets()
+        .then(function(data) {
+            var sets = data.sets;
+            if( sets ) {
+                localStorage.setItem("mtgSets", JSON.stringify(sets));
+
+                var content = getSetOptionsContent(sets);
+                setFieldEl.innerHTML = "";
+                setFieldEl.append(content);
+            }
+        });
+
+}
+
+fetchAndDisplaySetOptions();

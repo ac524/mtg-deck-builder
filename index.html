@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magic: The Gathering Deck Builder</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
 </head>
 <body>
     <!-- Navbar -->
-    <div class="flex justify-between border-b border-solid border-zinc-300">
-        <h1 class="p-2">M:TG Deck Builder</h1>
+    <div class="flex justify-between border-b border-solid border-zinc-300 mb-5">
+        <h1 class="p-2"><a href="./index.html" class="hover:text-sky-600 font-bold">M:TG Deck Builder</a></h1>
         <nav class="flex divide-x divide-zinc-300">
             <a class="px-4 py-2 bg-zinc-100 hover:bg-amber-200" href="./index.html"><i class="fa-solid fa-magnifying-glass"></i> Search</a>
             <a class="px-4 py-2 bg-zinc-100 hover:bg-amber-200" href="./mydeck.html"><i class="fa-solid fa-book"></i> My Deck</a>
@@ -38,7 +39,8 @@
             </div>
             <div class="grid gap-1">
                 <label for="card-set-field">Set</label>
-                <select id="card-set-field" class="w-full border border-solid border-zinc-200 rounded-md p-2"></select>
+                <input id="card-set-field" type="text" class="w-full border border-solid border-zinc-200 rounded-md p-2">
+                <!-- <select id="card-set-field" class="w-full border border-solid border-zinc-200 rounded-md p-2"></select> -->
             </div>
             <button id="search-btn" class="px-4 py-2 font-semibold text-sm bg-sky-500 hover:bg-sky-600 text-white rounded-md shadow-sm"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
         </div>
@@ -72,6 +74,7 @@
     </div>
     <script src="https://kit.fontawesome.com/dd3761bf5b.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
     <script src="./js/mtgapi.js"></script>
     <script src="./js/render.js"></script>
     <script src="./js/search.js"></script>

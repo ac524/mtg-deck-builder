@@ -1,18 +1,32 @@
-function getCardsContent(cards) {
+function getCardsContent(cards, deck) {
     
     var fragEl = document.createDocumentFragment();
 
     for(var i = 0; i < cards.length; i++) {
+
+        if(!cards[i].imageUrl) continue;
+
+        var cardInDeck = deck && deck.find(function(card) {
+            return card.id === cards[i].id;
+        });
+
         var divEl = document.createElement('div');
+        var barStyle = "bg-zinc-200";
 
-        divEl.setAttribute("class", "grid gap-2")
+        var favButton = deck ? `<button class="hover:text-sky-500 p-2" data-card-index="${i}"><i class="fa-solid fa-heart"></i></button>` : "";
 
-        if(!cards[i].imageUrl) continue;         
+        divEl.setAttribute("class", "grid gap-2");
+
+        if( cardInDeck ) {
+            divEl.classList.add('active');
+            barStyle = "bg-sky-800 text-white";
+        }
+
 
         var template = `
-        <div class="px-2 bg-zinc-200 flex justify-between rounded-md">
+        <div class="px-2 ${barStyle} flex justify-between rounded-md">
             <h2 class="p-2">${cards[i].name}</h2>
-            <button class="hover:text-sky-500 p-2" data-card-index="${i}"><i class="fa-solid fa-heart"></i></button>
+            ${favButton}
         </div>
         <img
             class="w-full"

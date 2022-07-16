@@ -38,7 +38,7 @@ searchBtnEl.addEventListener("click", function() {
             }
             cards = data.cards;
             // console.log(cards);
-            var content = getCardsContent(cards);
+            var content = getCardsContent(cards, deck);
             // resultsEl.innerHTML = "";
             resultsEl.html(content);
         });
@@ -64,16 +64,14 @@ resultsEl.on("click", "button[data-card-index]", function(event) {
     // Resave the deck to `localStorage`
     localStorage.setItem("mtgDeck", JSON.stringify(deck));
 
+    $(event.currentTarget)
+        .parent()
+        .removeClass('bg-zinc-200')
+        .addClass('bg-sky-800 text-white')
+        .parent()
+        .addClass('active');
+
 });
-
-
-    
-
-    
-
-    
-
-    
 
 function fetchAndDisplaySetOptions() {
 
@@ -82,9 +80,10 @@ function fetchAndDisplaySetOptions() {
     var savedSets = savedSetsJSON ? JSON.parse(savedSetsJSON) : false;
     
     if( savedSets ) {
-        var content = getSetOptionsContent(savedSets);
-        setFieldEl.innerHTML = "";
-        setFieldEl.append(content);
+        // var content = getSetOptionsContent(savedSets);
+        // setFieldEl.innerHTML = "";
+        // setFieldEl.append(content);
+        createAutoComplete(savedSets);
         return;
     }
     
@@ -93,13 +92,24 @@ function fetchAndDisplaySetOptions() {
             var sets = data.sets;
             if( sets ) {
                 localStorage.setItem("mtgSets", JSON.stringify(sets));
+                createAutoComplete(sets);
 
-                var content = getSetOptionsContent(sets);
-                setFieldEl.innerHTML = "";
-                setFieldEl.append(content);
+                // var content = getSetOptionsContent(sets);
+                // setFieldEl.innerHTML = "";
+                // setFieldEl.append(content);
             }
         });
 
+}
+
+function createAutoComplete( sets ) {
+    var setNames = sets.map(function(set) {
+        return set.name;
+    });
+
+    $( "#card-set-field" ).autocomplete({
+        source: setNames
+    });
 }
 
 fetchAndDisplaySetOptions();

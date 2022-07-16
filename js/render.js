@@ -1,4 +1,4 @@
-function getCardsContent(cards, deck) {
+function getCardsContent(cards, deck, isAdding = true) {
     
     var fragEl = document.createDocumentFragment();
 
@@ -6,27 +6,27 @@ function getCardsContent(cards, deck) {
 
         if(!cards[i].imageUrl) continue;
 
-        var cardInDeck = deck && deck.find(function(card) {
-            return card.id === cards[i].id;
-        });
-
         var divEl = document.createElement('div');
         var barStyle = "bg-zinc-200";
 
-        var favButton = deck ? `<button class="hover:text-sky-500 p-2" data-card-index="${i}"><i class="fa-solid fa-heart"></i></button>` : "";
+        var actionIcon = isAdding ? "fa-heart" : "fa-xmark";
 
         divEl.setAttribute("class", "grid gap-2");
 
-        if( cardInDeck ) {
-            divEl.classList.add('active');
-            barStyle = "bg-sky-800 text-white";
+        if( isAdding ) {
+            var cardInDeck = deck && deck.find(function(card) {
+                return card.id === cards[i].id;
+            });
+            if(cardInDeck) {
+                divEl.classList.add('active');
+                barStyle = "bg-sky-800 text-white";
+            }
         }
-
 
         var template = `
         <div class="px-2 ${barStyle} flex justify-between rounded-md">
             <h2 class="p-2">${cards[i].name}</h2>
-            ${favButton}
+            <button class="hover:text-sky-500 p-2" data-card-index="${i}"><i class="fa-solid ${actionIcon}"></i></button>
         </div>
         <img
             class="w-full"

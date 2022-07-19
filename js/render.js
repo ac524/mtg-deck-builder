@@ -13,20 +13,32 @@ function getCardsContent(cards, deck, isAdding = true) {
 
         divEl.setAttribute("class", "grid gap-2");
 
+        var countInDeck = 0;
+        var cardCountEl = "";
         if( isAdding ) {
-            var cardInDeck = deck && deck.find(function(card) {
-                return card.id === cards[i].id;
-            });
-            if(cardInDeck) {
+            countInDeck = deck && deck.reduce(function(count, card) {
+                if(card.id === cards[i].id) {
+                    return count + 1;
+                }
+                return count;
+            }, 0);
+            if(countInDeck) {
                 divEl.classList.add('active');
                 barStyle = "bg-sky-800 text-white";
             }
+
+            cardCountEl = `<span id="card-count-${i}">${countInDeck}</span>`;
         }
 
+        console.log(countInDeck);
+
         var template = `
-        <div class="px-2 ${barStyle} flex justify-between rounded-md">
+        <div class="card-header px-2 ${barStyle} flex justify-between align-center rounded-md">
             <h2 class="p-2">${cards[i].name}</h2>
-            <button class="hover:text-sky-500 p-2" data-card-index="${i}"><i class="fa-solid ${actionIcon}"></i></button>
+            <div>
+                ${cardCountEl}
+                <button class="hover:text-sky-500 p-2" data-card-index="${i}"><i class="fa-solid ${actionIcon}"></i></button>
+            </div>
         </div>
         <img
             class="w-full"

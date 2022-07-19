@@ -36,7 +36,15 @@ searchBtnEl.addEventListener("click", function() {
                 introEl.style.display = "none";
                 isIntroHidden = true;
             }
-            cards = data.cards;
+
+            cards = data.cards.map(function(card) {
+                return {
+                    id: card.id,
+                    imageUrl: card.imageUrl,
+                    name: card.name
+                }
+            });
+
             // console.log(cards);
             var content = getCardsContent(cards, deck);
             // resultsEl.innerHTML = "";
@@ -65,12 +73,16 @@ resultsEl.on("click", "button[data-card-index]", function(event) {
     localStorage.setItem("mtgDeck", JSON.stringify(deck));
 
     $(event.currentTarget)
-        .parent()
+        .closest('.card-header')
         .removeClass('bg-zinc-200')
         .addClass('bg-sky-800 text-white')
         .parent()
         .addClass('active');
 
+    var countEl = $(`#card-count-${cardIndex}`);
+    var currentCount = parseInt(countEl.text());
+    countEl.text(currentCount+1);
+    
 });
 
 function fetchAndDisplaySetOptions() {
@@ -91,7 +103,14 @@ function fetchAndDisplaySetOptions() {
         .then(function(data) {
             var sets = data.sets;
             if( sets ) {
-                localStorage.setItem("mtgSets", JSON.stringify(sets));
+                const mySets = sets.map(function(set) {
+                    return {
+                        code: set.code,
+                        name: set.name
+                    }
+                });
+
+                localStorage.setItem("mtgSets", JSON.stringify(mySets));
                 createAutoComplete(sets);
 
                 // var content = getSetOptionsContent(sets);
